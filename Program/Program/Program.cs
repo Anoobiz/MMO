@@ -13,6 +13,7 @@ namespace Program
             //Test
             Console.WriteLine("Mikkel kan ændre - ParallelLoopState på med det!"); 
             //test MArtin
+			//test2
 
 		}
 	}
