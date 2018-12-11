@@ -9,8 +9,9 @@ namespace Program
 {
     class Forside
     {
-        public static void DisplayTop(int LogoLeftStart)
+        public static void DisplayTop()
         {
+            int LogoLeftStart = Console.WindowWidth / 2 - 14;
             int TopBarTop = 0;
             int TopBarBund = 6;
             int Windowwidth = Console.WindowWidth;
