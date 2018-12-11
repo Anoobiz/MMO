@@ -8,6 +8,6 @@ namespace Program
 {
     class SQLconnection
     {
-        public string connection = "";
+        public string connection = "lol123";
     }
 }
