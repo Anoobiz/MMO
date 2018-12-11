@@ -17,20 +17,23 @@ namespace Program
             while (kører)
             {
                 Console.Clear();
-                Forside.DisplayTop(4);
+                Forside.DisplayTop();
                 //placerer alt under vores header
                 Console.SetCursorPosition(5, 8);
-                Console.Write("Kundekartotek    1");
+                Console.Write("Vis Kundekartotek    1");
                 Console.SetCursorPosition(5, 9);
-                Console.Write("Bilbase          2");
+                Console.Write("Vis Bilbase          2");
                 Console.SetCursorPosition(5, 10);
-                Console.Write("Værkstedsbesøg   3");
+                Console.Write("Vis Værkstedslog     3");
                 Console.SetCursorPosition(5, 11);
-                Console.Write("Afslut program   Q");
+                Console.Write("Administrér          4");
+                Console.SetCursorPosition(5, 12);
+                Console.Write("Afslut program       Q");
                 Console.WriteLine();
-                ConsoleKeyInfo vælger = Console.ReadKey(true);
+                ConsoleKeyInfo vælger1 = Console.ReadKey(true);
+                ConsoleKeyInfo vælger2;
 
-                switch (vælger.Key)
+                switch (vælger1.Key)
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
@@ -43,6 +46,44 @@ namespace Program
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
                         Console.WriteLine("Værkstedsbesøg");
+                        break;
+                        //Rediger databaser menu
+                    case ConsoleKey.D4:
+                        Console.Clear();
+                        Forside.DisplayTop();
+                        //placerer alt under vores header
+                        Console.SetCursorPosition(5, 8);
+                        Console.Write("Rediger Kundekartotek    1");
+                        Console.SetCursorPosition(5, 9);
+                        Console.Write("Rediger Bilbase          2");
+                        Console.SetCursorPosition(5, 10);
+                        Console.Write("Rediger Værkstedslog     3");
+                        Console.SetCursorPosition(5, 11);
+                        Console.Write("Tilbage til hovedmenu    Q");
+                        Console.WriteLine();
+                        vælger2 = Console.ReadKey(true);
+                        switch (vælger2.Key)
+                        {
+                            case ConsoleKey.D1:
+                            case ConsoleKey.NumPad1:
+                                Console.WriteLine("Indsæt indsæt-kode her");
+                                break;
+                            case ConsoleKey.D2:
+                            case ConsoleKey.NumPad2:
+                                Console.WriteLine("Indsæt indsæt-kode her");
+                                break;
+                            case ConsoleKey.D3:
+                            case ConsoleKey.NumPad3:
+                                Console.WriteLine("Indsæt indsæt-kode her");
+                                break;
+                            case ConsoleKey.Q:
+                               
+                                break;
+                            default:
+                                Console.WriteLine("Det var vist ikke 1, 2, 3 eller q");
+                                break;
+                        }
+
                         break;
                     case ConsoleKey.Q:
                         kører = false;
