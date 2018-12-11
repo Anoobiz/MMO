@@ -19,7 +19,7 @@ namespace Program
 				cmd.ExecuteNonQuery();
 			}
 		}
-		public static void SelectAllKunde(string sql)
+		public static void SelectAllDataKunde(string sql)
 		{
 			DataTable table = new DataTable();
 			using (SqlConnection con = new SqlConnection(SQLcon.SQLconnection))
@@ -30,14 +30,14 @@ namespace Program
 
 				foreach (DataRow item in table.Rows)
 				{
-					Console.Write(item["KundeId"].ToString() + ". ");
-					Console.Write(item["Navn"].ToString() + " ");
-					Console.Write(item["EfterNavn"].ToString() + " ");
-					Console.Write(item["Adresse"].ToString() + " ");
-					Console.Write(item["PostNr"].ToString() + " ");
-					Console.Write(item["Tlf"].ToString() + " ");
-					Console.Write(item["OpretDato"].ToString() + " ");
-					Console.Write(item["Email"].ToString() + " ");
+					Console.WriteLine("Kunde ID: "+ item["KundeId"].ToString() + ". ");
+					Console.WriteLine("Navn: "+ item["Navn"].ToString() + " ");
+					Console.WriteLine("Efternavn: "+ item["EfterNavn"].ToString() + " ");
+					Console.WriteLine("Adresse: " + item["Adresse"].ToString() + " ");
+					Console.WriteLine("Postnummer: "+item["PostNr"].ToString() + " ");
+					Console.WriteLine("Telefonnummer: "+item["Tlf"].ToString() + " ");
+					Console.WriteLine("Oprettelses dato: "+item["OpretDato"].ToString() + " ");
+					Console.WriteLine("E-Mail adresse: "+item["Email"].ToString() + " ");
 
 
 					Console.WriteLine();
