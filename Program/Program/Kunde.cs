@@ -16,19 +16,71 @@ namespace Program
 		public string OpretDato { get; set; }
 		public string Email { get; set; }
 
-		private static void opdaterKunde()
+		public void opdaterKunde()
 		{
+			Console.WriteLine("Kundeliste:\n");
+			SQL.SelectFewKunde("select * from Kunder");
+			Console.WriteLine();
+			Console.Write("Indtast ID på kunden du vil redigere: ");
+			int idValg = Convert.ToInt32(Console.ReadLine());
+			SQL.SelectAllDataKunde("select * from Kunder where KundeId = "+ idValg +"");
+			Console.WriteLine("Indtast nummeret på den information du vil opdatere:");
+			Console.WriteLine("1. Navn");
+			Console.WriteLine("2. Efternavn");
+			Console.WriteLine("3. Adresse");
+			Console.WriteLine("4. Postnummer");
+			Console.WriteLine("5. Telefonnummer");
+			Console.WriteLine("6. E-Mail adresse\n");
+			var info = "";
+			ConsoleKeyInfo nummer = Console.ReadKey(true);
+			switch (nummer.Key)
+			{
+				case ConsoleKey.D1:
+					Console.Write("Indtast et nyt navn: ");
+					info = Console.ReadLine();
+					SQL.Change("update Kunder set Navn = '" + info + "' where KundeId = "+ idValg + "");
+					break;
+				case ConsoleKey.D2:
+					Console.Write("Indtast et nyt efternavn: ");
+					info = Console.ReadLine();
+					SQL.Change("update Kunder set Efternavn = '" + info + "' where KundeId = " + idValg + "");
+					break;
+				case ConsoleKey.D3:
+					Console.Write("Indtast en ny adresse: ");
+					info = Console.ReadLine();
+					SQL.Change("update Kunder set Adresse = '" + info + "' where KundeId = " + idValg + "");
+					break;
+				case ConsoleKey.D4:
+					Console.Write("Indtast et nyt postnummer: ");
+					info = Console.ReadLine();
+					SQL.Change("update Kunder set PostNr = " + info + " where KundeId = " + idValg + "");
+					break;
+				case ConsoleKey.D5:
+					Console.Write("Indtast et nyt telefonnummer: ");
+					info = Console.ReadLine();
+					SQL.Change("update Kunder set Tlf = " + info + " where KundeId = " + idValg + "");
+					break;
+				case ConsoleKey.D6:
+					Console.Write("Indtast en ny E-Mail adresse: ");
+					info = Console.ReadLine();
+					SQL.Change("update Kunder set Adresse = '" + info + "' where KundeId = " + idValg + "");
+					break;
+				default:
+					Console.WriteLine("Du må kun vælge et nummer fra listen.");
+					break;
+			}
+
 
 		}
 		public void sletKunde()
 		{
 			Console.WriteLine("Kundeliste:\n");
-			SQL.SelectFewKunde("select KundeId, Navn, Efternavn from Kunder");
+			SQL.SelectFewKunde("select * from Kunder");
 			Console.WriteLine();
 			Console.Write("Indtast ID på kunden der skal slettes: ");
 			int idValg = Convert.ToInt32(Console.ReadLine());
 			SQL.Change("delete from Kunder where KundeId = " + idValg + "");
-			SQL.SelectFewKunde("select KundeId, Navn, Efternavn from Kunder");
+			SQL.SelectFewKunde("select * from Kunder");
 
 		}
 		public void opretKunde()
@@ -36,9 +88,9 @@ namespace Program
 			Console.Clear();
 			Console.WriteLine("Indtast Navn: ");		
 			Console.WriteLine("Indtast Efternavn: ");
-			Console.WriteLine("Indtast adresse: ");
+			Console.WriteLine("Indtast Adresse: ");
 			Console.WriteLine("Indtast Postnummer: ");
-			Console.WriteLine("Intast telefonnummer: ");
+			Console.WriteLine("Indtast Telefonnummer: ");
 			Console.WriteLine("Indtast E-Mail adresse: ");
 			Navn = Console.ReadLine();
 			Efternavn = Console.ReadLine();			
@@ -47,7 +99,7 @@ namespace Program
 			Tlf = Convert.ToInt32(Console.ReadLine());
 			Email = Console.ReadLine();
 			OpretDato = DateTime.Now.ToString("d");
-			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ",'" + OpretDato + "', '" + Email + "')"); 
+			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')"); 
 
 			
 		}
