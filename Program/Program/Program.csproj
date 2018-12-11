@@ -49,6 +49,7 @@
     <Compile Include="Kunde.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQL.cs" />
     <Compile Include="SQLcon.cs" />
   </ItemGroup>
   <ItemGroup>
