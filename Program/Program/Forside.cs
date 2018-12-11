@@ -8,5 +8,13 @@ namespace Program
 {
 	class Forside
 	{
+        static void DisplayTop()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Console.SetCursorPosition(i, 1);
+                Console.WriteLine("=");
+            }
+        }
 	}
 }
