@@ -92,7 +92,7 @@ namespace Program
         public static void Menu()
         {
             bool kører = true;
-			int idValg = 0;
+			
 
             while (kører)
             {
@@ -120,26 +120,7 @@ namespace Program
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
-						Console.Clear();
-						DisplayTop();
-						Console.WriteLine("Kundekartotek:\n");
-						SQL.SelectFewKunde("select * from Kunder");
-						Console.Write("\nIndtast ID på den kunde du vil se: ");
-                        try
-                        {
-                            idValg = Convert.ToInt32(Console.ReadLine());
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine($"Der er ikke nogen kunder i kartoteket!");
-                            Console.WriteLine("Tryk en tast");
-
-                            Console.ReadKey(true);
-                            
-                        }
-						SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
-
-						Console.ReadKey();
+						Kunde.visKunde();
                         break;
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
@@ -216,15 +197,15 @@ namespace Program
                                 {
                                     case ConsoleKey.D1:
                                     case ConsoleKey.NumPad1:
-                                        //Indsæt Opret Bil her
+										Bil.opretBil();
                                         break;
                                     case ConsoleKey.D2:
                                     case ConsoleKey.NumPad2:
-                                        //Indsæt rediger Bil her
+										Bil.opdaterBil();
                                         break;
                                     case ConsoleKey.D3:
                                     case ConsoleKey.NumPad3:
-                                        //Slet Bil her
+										Bil.sletBil();
                                         break;
                                     case ConsoleKey.Q:
                                         break;
@@ -250,15 +231,15 @@ namespace Program
                                 {
                                     case ConsoleKey.D1:
                                     case ConsoleKey.NumPad1:
-                                        //Indsæt Opret værkstedsbesøg her
+										Besøg.opretBesøg();
                                         break;
                                     case ConsoleKey.D2:
                                     case ConsoleKey.NumPad2:
-                                        //Indsæt Rediger værkstedsbesøg her
+										Besøg.opdaterBesøg();
                                         break;
                                     case ConsoleKey.D3:
                                     case ConsoleKey.NumPad3:
-                                        //Slet Værkstedsbesøg her
+										Besøg.sletBesøg();
                                         break;
                                     default:
                                         Console.WriteLine("Det var ikke én af valgmulighederne");

@@ -103,5 +103,33 @@ namespace Program
 			SQL.Change("delete from Kunder where KundeId = " + idValg + "");
 			SQL.SelectFewKunde("select * from Kunder");
 		}
+		public static void visKunde()
+		{
+			int idValg = 0;
+			Console.Clear();
+			Forside.DisplayTop();
+			Console.WriteLine("Kundekartotek:\n");
+			SQL.SelectFewKunde("select * from Kunder");
+			Console.Write("\nIndtast ID på den kunde du vil se: ");
+			try
+			{
+				idValg = Convert.ToInt32(Console.ReadLine());
+			}
+			catch (FormatException)
+			{
+				Console.WriteLine("Du må kun indtaste tal.");
+				Console.WriteLine("Tryk en tast");
+
+				Console.ReadKey(true);
+
+			}
+			catch (Exception)
+			{
+				Console.WriteLine("Der er ikke nogen kunder i kartoteket.");
+			}
+			SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
+
+			Console.ReadKey();
+		}
 	}
 }
