@@ -40,7 +40,7 @@ namespace Program
 			OpretDato = DateTime.Now.ToString("d");
 			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')");
 		}
-		public void opdaterKunde()
+		public static void opdaterKunde()
 		{
 			Console.WriteLine("Kundeliste:\n");
 			SQL.SelectFewKunde("select * from Kunder");
