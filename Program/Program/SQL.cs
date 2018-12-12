@@ -35,9 +35,9 @@ namespace Program
 					Console.WriteLine("Efternavn: " + item["EfterNavn"].ToString() + " ");
 					Console.WriteLine("Adresse: " + item["Adresse"].ToString() + " ");
 					Console.WriteLine("Postnummer: " + item["PostNr"].ToString() + " ");
-					Console.WriteLine("Telefonnummer: " + item["Tlf"].ToString() + " ");
-					Console.WriteLine("Oprettelses dato: " + item["OpretDato"].ToString() + " ");
+					Console.WriteLine("Telefonnummer: " + item["Tlf"].ToString() + " ");					
 					Console.WriteLine("E-Mail adresse: " + item["Email"].ToString() + " ");
+					Console.WriteLine("Oprettelses dato: " + item["OpretDato"].ToString() + " ");
 					Console.WriteLine();
 				}
 			}

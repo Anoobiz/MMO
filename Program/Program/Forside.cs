@@ -92,7 +92,7 @@ namespace Program
         public static void Menu()
         {
             bool kører = true;
-
+			int idValg = 0;
 
             while (kører)
             {
@@ -118,11 +118,19 @@ namespace Program
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
-                        Console.WriteLine("1 er valgt");
+						Console.Clear();
+						DisplayTop();
+						Console.WriteLine("Kundekartotek:\n");
+						SQL.SelectFewKunde("select * from Kunder");
+						Console.Write("\nIndtast ID på den kunde du vil se: ");
+						idValg = Convert.ToInt32(Console.ReadLine());
+						SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
+
+						Console.ReadKey();
                         break;
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
-                        Console.WriteLine("2 valgt");
+						SQL.SelectFewBil("select * from Bil");
                         break;
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
@@ -166,7 +174,7 @@ namespace Program
                                         break;
                                     case ConsoleKey.D2:
                                     case ConsoleKey.NumPad2:
-                                        //er på vej
+										Kunde.opdaterKunde();
                                         break;
                                     case ConsoleKey.D3:
                                     case ConsoleKey.NumPad3:
