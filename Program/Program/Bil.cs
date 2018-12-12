@@ -48,8 +48,7 @@ namespace Program
 		{
 			Console.WriteLine("Bil liste:\n");
 			SQL.SelectFewBil("select * from Bil");
-			Console.WriteLine();
-			Console.Write("Indtast ID på bilen du vil redigere: ");
+			Console.Write("\nIndtast ID på bilen du vil redigere: ");
 			int idValg = Convert.ToInt32(Console.ReadLine());
 			SQL.SelectAllDataKunde("select * from Bil where BilId = " + idValg + "");
 			Console.WriteLine("Indtast nummeret på den information du vil opdatere:");

@@ -43,9 +43,8 @@ namespace Program
 		public static void opdaterKunde()
 		{
 			Console.WriteLine("Kundeliste:\n");
-			SQL.SelectFewKunde("select * from Kunder");
-			Console.WriteLine();
-			Console.Write("Indtast ID på kunden du vil redigere: ");
+			SQL.SelectFewKunde("select * from Kunder");			
+			Console.Write("\nIndtast ID på kunden du vil redigere: ");
 			int idValg = Convert.ToInt32(Console.ReadLine());
 			SQL.SelectAllDataKunde("select * from Kunder where KundeId = "+ idValg +"");
 			Console.WriteLine("Indtast nummeret på den information du vil opdatere:");
