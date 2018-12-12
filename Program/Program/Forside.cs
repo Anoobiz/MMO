@@ -89,7 +89,7 @@ namespace Program
             Console.WriteLine(LogoText);
         }
 
-        public void Menu()
+        public static void Menu()
         {
             bool kører = true;
 
@@ -112,6 +112,7 @@ namespace Program
                 Console.WriteLine();
                 ConsoleKeyInfo vælger1 = Console.ReadKey(true);
                 ConsoleKeyInfo vælger2;
+                ConsoleKeyInfo vælger3;
 
                 switch (vælger1.Key)
                 {
@@ -130,7 +131,7 @@ namespace Program
                     //Rediger menu
                     case ConsoleKey.D4:
                         Console.Clear();
-                        Forside.DisplayTop();
+                        DisplayTop();
                         //placerer alt under vores header
                         Console.SetCursorPosition(5, 8);
                         Console.Write("Rediger Kundekartotek    1");
@@ -144,17 +145,101 @@ namespace Program
                         vælger2 = Console.ReadKey(true);
                         switch (vælger2.Key)
                         {
+                            //Rediger kunde
                             case ConsoleKey.D1:
                             case ConsoleKey.NumPad1:
-                                Console.WriteLine("Indsæt indsæt-kode her");
+                                Console.SetCursorPosition(5, 8);
+                                Console.Write("Opret Kunde              1");
+                                Console.SetCursorPosition(5, 9);
+                                Console.Write("Rediger Kunde            2");
+                                Console.SetCursorPosition(5, 10);
+                                Console.Write("Slet Kunde               3");
+                                Console.SetCursorPosition(5, 11);
+                                Console.Write("Tilbage til hovedmenu    Q");
+                                Console.WriteLine();
+                                vælger3 = Console.ReadKey(true);
+                                switch (vælger3.Key)
+                                {
+                                    case ConsoleKey.D1:
+                                    case ConsoleKey.NumPad1:
+                                        //Indsæt Opret kunde her
+                                        break;
+                                    case ConsoleKey.D2:
+                                    case ConsoleKey.NumPad2:
+                                        //Indsæt rediger kunde her
+                                        break;
+                                    case ConsoleKey.D3:
+                                    case ConsoleKey.NumPad3:
+                                        //Slet kunde her
+                                        break;
+                                    default:
+                                        Console.WriteLine("Det var ikke én af valgmulighederne");
+                                         break;
+                                }
                                 break;
+                        //Rediger bil
                             case ConsoleKey.D2:
                             case ConsoleKey.NumPad2:
-                                Console.WriteLine("Indsæt indsæt-kode her");
+                                Console.SetCursorPosition(5, 8);
+                                Console.Write("Opret Bil                1");
+                                Console.SetCursorPosition(5, 9);
+                                Console.Write("Rediger Bil              2");
+                                Console.SetCursorPosition(5, 10);
+                                Console.Write("Slet Bil                 3");
+                                Console.SetCursorPosition(5, 11);
+                                Console.Write("Tilbage til hovedmenu    Q");
+                                Console.WriteLine();
+                                vælger3 = Console.ReadKey(true);
+                                switch (vælger3.Key)
+                                {
+                                    case ConsoleKey.D1:
+                                    case ConsoleKey.NumPad1:
+                                        //Indsæt Opret Bil her
+                                        break;
+                                    case ConsoleKey.D2:
+                                    case ConsoleKey.NumPad2:
+                                        //Indsæt rediger Bil her
+                                        break;
+                                    case ConsoleKey.D3:
+                                    case ConsoleKey.NumPad3:
+                                        //Slet Bil her
+                                        break;
+                                    default:
+                                        Console.WriteLine("Det var ikke én af valgmulighederne");
+                                        break;
+                                }
                                 break;
+                        //Rediger værkstedsbesøg
                             case ConsoleKey.D3:
                             case ConsoleKey.NumPad3:
-                                Console.WriteLine("Indsæt indsæt-kode her");
+                                Console.SetCursorPosition(5, 8);
+                                Console.Write("Opret ny Service         1");
+                                Console.SetCursorPosition(5, 9);
+                                Console.Write("Rediger Faktura          2");
+                                Console.SetCursorPosition(5, 10);
+                                Console.Write("Slet faktura             3");
+                                Console.SetCursorPosition(5, 11);
+                                Console.Write("Tilbage til hovedmenu    Q");
+                                Console.WriteLine();
+                                vælger3 = Console.ReadKey(true);
+                                switch (vælger3.Key)
+                                {
+                                    case ConsoleKey.D1:
+                                    case ConsoleKey.NumPad1:
+                                        //Indsæt Opret værkstedsbesøg her
+                                        break;
+                                    case ConsoleKey.D2:
+                                    case ConsoleKey.NumPad2:
+                                        //Indsæt Rediger værkstedsbesøg her
+                                        break;
+                                    case ConsoleKey.D3:
+                                    case ConsoleKey.NumPad3:
+                                        //Slet Værkstedsbesøg her
+                                        break;
+                                    default:
+                                        Console.WriteLine("Det var ikke én af valgmulighederne");
+                                        break;
+                                }
                                 break;
                             case ConsoleKey.Q:
 
