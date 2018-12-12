@@ -113,5 +113,25 @@ namespace Program
 			SQL.Change("delete from Bil where BilId = " + idValg + "");
 			SQL.SelectFewBil("select * from Bil");
 		}
+		public static void visBil()
+		{
+			int idValg = 0;
+			Console.Clear();
+			Forside.DisplayTop();
+			Console.WriteLine("Bilkartotek:\n");
+			SQL.SelectFewBil("select * from Bil");
+			Console.Write("\nIndtast ID på den bil du vil se: ");
+			try
+			{
+				idValg = Convert.ToInt32(Console.ReadLine());
+			}
+			catch (FormatException)
+			{
+				Console.WriteLine("Du må kun indtaste tal. Tryk på en tast.");
+			}
+			SQL.SelectAllDataBil("select * from Bil where BilId = " + idValg + "");
+			SQL.SelectBesøg("select * from Besøg where BilId = " + idValg + "");
+			Console.ReadKey();
+		}
 	}
 }

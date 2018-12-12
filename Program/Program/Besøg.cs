@@ -55,13 +55,21 @@ namespace Program
 		}
 		public static void sletBesøg()
 		{
-			Console.WriteLine("Værksteds ophold:\n");
+			Console.WriteLine("Værkstedlog:\n");
 			SQL.SelectBesøg("select * from Besøg");
 			Console.WriteLine();
 			Console.Write("Indtast ID på værksteds opholdet der skal slettes: ");
 			int idValg = Convert.ToInt32(Console.ReadLine());
 			SQL.Change("delete from Besøg where FakturaNr = " + idValg + "");
 			SQL.SelectBesøg("select * from Besøg");
+		}
+		public static void visBesøg()
+		{			
+			Console.Clear();
+			Forside.DisplayTop();
+			Console.WriteLine("Værkstedslog:\n");
+			SQL.SelectBesøg("select * from Besøg");
+			Console.ReadKey();
 		}
 	}
 }

@@ -124,11 +124,11 @@ namespace Program
                         break;
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
-						SQL.SelectFewBil("select * from Bil");
+						Bil.visBil();
                         break;
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
-                        Console.WriteLine("Værkstedsbesøg:");
+						Besøg.visBesøg();
 
                         break;
                     //Rediger menu

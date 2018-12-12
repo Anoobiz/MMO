@@ -43,10 +43,10 @@ namespace Program
 		public static void opdaterKunde()
 		{
 			Console.WriteLine("Kundeliste:\n");
-			SQL.SelectFewKunde("select * from Kunder");			
+			SQL.SelectFewKunde("select * from Kunder");
 			Console.Write("\nIndtast ID på kunden du vil redigere: ");
 			int idValg = Convert.ToInt32(Console.ReadLine());
-			SQL.SelectAllDataKunde("select * from Kunder where KundeId = "+ idValg +"");
+			SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
 			Console.WriteLine("Indtast nummeret på den information du vil opdatere:");
 			Console.WriteLine("1. Navn");
 			Console.WriteLine("2. Efternavn");
@@ -61,7 +61,7 @@ namespace Program
 				case ConsoleKey.D1:
 					Console.Write("Indtast et nyt navn: ");
 					info = Console.ReadLine();
-					SQL.Change("update Kunder set Navn = '" + info + "' where KundeId = "+ idValg + "");
+					SQL.Change("update Kunder set Navn = '" + info + "' where KundeId = " + idValg + "");
 					break;
 				case ConsoleKey.D2:
 					Console.Write("Indtast et nyt efternavn: ");
@@ -117,18 +117,10 @@ namespace Program
 			}
 			catch (FormatException)
 			{
-				Console.WriteLine("Du må kun indtaste tal.");
-				Console.WriteLine("Tryk en tast");
-
-				Console.ReadKey(true);
-
-			}
-			catch (Exception)
-			{
-				Console.WriteLine("Der er ikke nogen kunder i kartoteket.");
+				Console.WriteLine("Du må kun indtaste tal. Tryk på en tast.");					
 			}
 			SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
-
+			SQL.SelectFewBil("select * from Bil where KundeId = " + idValg + "");
 			Console.ReadKey();
 		}
 	}
