@@ -69,8 +69,6 @@ namespace Program
 					Console.WriteLine("Du må kun vælge et nummer fra listen.");
 					break;
 			}
-
-
 		}
 		public void sletKunde()
 		{
@@ -81,37 +79,31 @@ namespace Program
 			int idValg = Convert.ToInt32(Console.ReadLine());
 			SQL.Change("delete from Kunder where KundeId = " + idValg + "");
 			SQL.SelectFewKunde("select * from Kunder");
-
 		}
 		public void opretKunde()
 		{
 			Console.Clear();
+			Forside.DisplayTop();
 			Console.WriteLine("Indtast Navn: ");		
 			Console.WriteLine("Indtast Efternavn: ");
 			Console.WriteLine("Indtast Adresse: ");
 			Console.WriteLine("Indtast Postnummer: ");
 			Console.WriteLine("Indtast Telefonnummer: ");
 			Console.WriteLine("Indtast E-Mail adresse: ");
+			Console.SetCursorPosition(30, 7);
 			Navn = Console.ReadLine();
-			Efternavn = Console.ReadLine();			
+			Console.SetCursorPosition(30, 8);
+			Efternavn = Console.ReadLine();
+			Console.SetCursorPosition(30, 9);
 			Adr = Console.ReadLine();
+			Console.SetCursorPosition(30, 10);
 			Postnr = Convert.ToInt32(Console.ReadLine());
+			Console.SetCursorPosition(30, 11);
 			Tlf = Convert.ToInt32(Console.ReadLine());
+			Console.SetCursorPosition(30, 12);
 			Email = Console.ReadLine();
 			OpretDato = DateTime.Now.ToString("d");
-			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')"); 
-
-			
+			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')"); 			
 		}
-		//public Kunde(string navn, string efternavn, string adresse, int postnr, int tlf, string email, DateTime opretDato)
-		//{
-		//	Navn = navn;
-		//	Efternavn = efternavn;
-		//	Adr = adresse;
-		//	Postnr = postnr;
-		//	Tlf = tlf;
-		//	Email = email;
-		//	OpretDato = opretDato;
-		//}
 	}
 }

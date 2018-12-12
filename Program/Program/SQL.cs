@@ -8,8 +8,8 @@ using System.Data.SqlClient;
 
 namespace Program
 {
-    class SQL
-    {
+	class SQL
+	{
 		public static void Change(string sql)
 		{
 			using (SqlConnection con = new SqlConnection(SQLcon.SQLconnection))
@@ -30,20 +30,17 @@ namespace Program
 
 				foreach (DataRow item in table.Rows)
 				{
-					Console.WriteLine("Kunde ID: "+ item["KundeId"].ToString() + ". ");
-					Console.WriteLine("Navn: "+ item["Navn"].ToString() + " ");
-					Console.WriteLine("Efternavn: "+ item["EfterNavn"].ToString() + " ");
+					Console.WriteLine("Kunde ID: " + item["KundeId"].ToString() + ". ");
+					Console.WriteLine("Navn: " + item["Navn"].ToString() + " ");
+					Console.WriteLine("Efternavn: " + item["EfterNavn"].ToString() + " ");
 					Console.WriteLine("Adresse: " + item["Adresse"].ToString() + " ");
-					Console.WriteLine("Postnummer: "+item["PostNr"].ToString() + " ");
-					Console.WriteLine("Telefonnummer: "+item["Tlf"].ToString() + " ");
-					Console.WriteLine("Oprettelses dato: "+item["OpretDato"].ToString() + " ");
-					Console.WriteLine("E-Mail adresse: "+item["Email"].ToString() + " ");
-
-
+					Console.WriteLine("Postnummer: " + item["PostNr"].ToString() + " ");
+					Console.WriteLine("Telefonnummer: " + item["Tlf"].ToString() + " ");
+					Console.WriteLine("Oprettelses dato: " + item["OpretDato"].ToString() + " ");
+					Console.WriteLine("E-Mail adresse: " + item["Email"].ToString() + " ");
 					Console.WriteLine();
 				}
 			}
-
 		}
 		public static void SelectFewKunde(string sql)
 		{
@@ -62,7 +59,6 @@ namespace Program
 					Console.WriteLine();
 				}
 			}
-
 		}
 		public static void SelectBil(string sql)
 		{
@@ -75,7 +71,7 @@ namespace Program
 
 				foreach (DataRow item in table.Rows)
 				{
-					Console.Write(item["KundeId"].ToString() + " ");
+					Console.Write(item["KundeId"].ToString() + ". ");
 					Console.Write(item["BilId"].ToString() + " ");
 					Console.Write(item["Mærke"].ToString() + " ");
 					Console.Write(item["Model"].ToString() + " ");
@@ -83,9 +79,6 @@ namespace Program
 					Console.Write(item["KmKørt"].ToString() + " ");
 					Console.Write(item["Brændstof"].ToString() + " ");
 					Console.Write(item["RegNr"].ToString() + " ");
-
-
-
 					Console.WriteLine();
 				}
 			}
@@ -107,8 +100,6 @@ namespace Program
 					Console.Write(item["FakturaNr"].ToString() + " ");
 					Console.Write(item["Dato"].ToString() + " ");
 					Console.Write(item["Udført"].ToString() + " ");
-
-
 					Console.WriteLine();
 				}
 			}
