@@ -162,15 +162,15 @@ namespace Program
                                 {
                                     case ConsoleKey.D1:
                                     case ConsoleKey.NumPad1:
-                                        //Indsæt Opret kunde her
+                                        Kunde.opretKunde();
                                         break;
                                     case ConsoleKey.D2:
                                     case ConsoleKey.NumPad2:
-                                        //Indsæt rediger kunde her
+                                        //er på vej
                                         break;
                                     case ConsoleKey.D3:
                                     case ConsoleKey.NumPad3:
-                                        //Slet kunde her
+                                        Kunde.sletKunde();
                                         break;
                                     default:
                                         Console.WriteLine("Det var ikke én af valgmulighederne");
