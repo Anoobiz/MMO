@@ -60,7 +60,7 @@ namespace Program
 				}
 			}
 		}
-		public static void SelectBil(string sql)
+		public static void SelectAllDataBil(string sql)
 		{
 			DataTable table = new DataTable();
 			using (SqlConnection con = new SqlConnection(SQLcon.SQLconnection))
@@ -71,13 +71,35 @@ namespace Program
 
 				foreach (DataRow item in table.Rows)
 				{
-					Console.Write(item["KundeId"].ToString() + ". ");
-					Console.Write(item["BilId"].ToString() + " ");
+					Console.WriteLine("Kunde ID: "+item["KundeId"].ToString() + ". ");
+					Console.WriteLine("Bil ID: "+item["BilId"].ToString() + " ");
+					Console.WriteLine("Mærke: "+item["Mærke"].ToString() + " ");
+					Console.WriteLine("Model: "+item["Model"].ToString() + " ");
+					Console.WriteLine("Årgang: "+item["Årgang"].ToString() + " ");
+					Console.WriteLine("Km kørt: "+item["KmKørt"].ToString() + " ");
+					Console.WriteLine("Brændstof: "+item["Brændstof"].ToString() + " ");
+					Console.WriteLine("Reg Nr: "+item["RegNr"].ToString() + " ");
+					Console.WriteLine();
+				}
+			}
+
+		}
+		public static void SelectFewBil(string sql)
+		{
+			DataTable table = new DataTable();
+			using (SqlConnection con = new SqlConnection(SQLcon.SQLconnection))
+			{
+				con.Open();
+				SqlDataAdapter adapter = new SqlDataAdapter(sql, con);
+				adapter.Fill(table);
+
+				foreach (DataRow item in table.Rows)
+				{
+					Console.Write(item["BilId"].ToString() + ". ");
+					Console.Write(item["KundeId"].ToString() + " ");					
 					Console.Write(item["Mærke"].ToString() + " ");
 					Console.Write(item["Model"].ToString() + " ");
-					Console.Write(item["Årgang"].ToString() + " ");
-					Console.Write(item["KmKørt"].ToString() + " ");
-					Console.Write(item["Brændstof"].ToString() + " ");
+					Console.Write(item["Årgang"].ToString() + " ");									
 					Console.Write(item["RegNr"].ToString() + " ");
 					Console.WriteLine();
 				}

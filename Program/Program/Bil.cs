@@ -8,37 +8,52 @@ namespace Program
 {
 	class Bil
 	{
-		public string Mærke { get; set; }
-		public string Model { get; set; }
-		public int Årgang { get; set; }
-		public int KmKørt { get; set; }
-		public string Brændstof { get; set; }
-		public string OpretDato { get; set; }
-		public int RegNr { get; set; }
-		public void opretBil()
+		public static void opretBil()
 		{
+			string Mærke;
+			string Model;
+			int Årgang;
+			int KmKørt;
+			string Brændstof;
+			string OpretDato;
+			string RegNr;
+			int KundeId;
 			Console.Clear();
 			Forside.DisplayTop();
+			Console.WriteLine("Indtast KundeID: ");
 			Console.WriteLine("Indtast Mærke: ");
 			Console.WriteLine("Indtast Model: ");
 			Console.WriteLine("Indtast Årgang: ");
 			Console.WriteLine("Indtast KmKørt: ");
 			Console.WriteLine("Indtast Brændstof: ");
-			Console.WriteLine("Indtast Registreringsnummer: ");
+			Console.WriteLine("Indtast RegistreringsNr: ");
 			Console.SetCursorPosition(30, 7);
-			Mærke = Console.ReadLine();
+			KundeId = Convert.ToInt32(Console.ReadLine());
 			Console.SetCursorPosition(30, 8);
-			Model = Console.ReadLine();
+			Mærke = Console.ReadLine();
 			Console.SetCursorPosition(30, 9);
-			Årgang = Convert.ToInt32(Console.ReadLine());
+			Model = Console.ReadLine();
 			Console.SetCursorPosition(30, 10);
-			KmKørt = Convert.ToInt32(Console.ReadLine());
+			Årgang = Convert.ToInt32(Console.ReadLine());
 			Console.SetCursorPosition(30, 11);
+			KmKørt = Convert.ToInt32(Console.ReadLine());
+			Console.SetCursorPosition(30, 12);
 			Brændstof = Console.ReadLine();
-			Console.SetCursorPosition(30, );
-			RegNr = Convert.ToInt32(Console.ReadLine());
+			Console.SetCursorPosition(30, 13);
+			RegNr = Console.ReadLine();
 			OpretDato = DateTime.Now.ToString("d");
-			SQL.Change("insert into Bil values('" + Mærke + "', '" + Model + "', '" + Årgang + "', " + KmKørt + ", " + Brændstof + ", '" + RegNr + "', '" + OpretDato + "')");
+			SQL.Change("insert into Bil values(" + KundeId + ",'" + Mærke + "', '" + Model + "', " + Årgang + ", " + KmKørt + ", '" + Brændstof + "', '" + RegNr + "', '" + OpretDato + "')");
+		}
+
+		public static void sletBil()
+		{
+			Console.WriteLine("Bil liste:\n");
+			SQL.SelectFewBil("select * from Bil");
+			Console.WriteLine();
+			Console.Write("Indtast ID på bilen der skal slettes: ");
+			int idValg = Convert.ToInt32(Console.ReadLine());
+			SQL.Change("delete from Bil where BilId = " + idValg + "");
+			SQL.SelectFewBil("select * from Bil");
 		}
 	}
 }
