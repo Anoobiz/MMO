@@ -110,10 +110,12 @@ namespace Program
                 Console.SetCursorPosition(5, 12);
                 Console.Write("Afslut program       Q");
                 Console.WriteLine();
+                //Vælgere til switches
                 ConsoleKeyInfo vælger1 = Console.ReadKey(true);
                 ConsoleKeyInfo vælger2;
                 ConsoleKeyInfo vælger3;
 
+                //Hovedmenu
                 switch (vælger1.Key)
                 {
                     case ConsoleKey.D1:
@@ -123,7 +125,18 @@ namespace Program
 						Console.WriteLine("Kundekartotek:\n");
 						SQL.SelectFewKunde("select * from Kunder");
 						Console.Write("\nIndtast ID på den kunde du vil se: ");
-						idValg = Convert.ToInt32(Console.ReadLine());
+                        try
+                        {
+                            idValg = Convert.ToInt32(Console.ReadLine());
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine($"Der er ikke nogen kunder i kartoteket!");
+                            Console.WriteLine("Tryk en tast");
+
+                            Console.ReadKey(true);
+                            
+                        }
 						SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
 
 						Console.ReadKey();
@@ -134,13 +147,14 @@ namespace Program
                         break;
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
-                        Console.WriteLine("Værkstedsbesøg");
+                        Console.WriteLine("Værkstedsbesøg:");
+
                         break;
                     //Rediger menu
                     case ConsoleKey.D4:
                         Console.Clear();
                         DisplayTop();
-                        //placerer alt under vores header
+                        //Redigermenu
                         Console.SetCursorPosition(5, 8);
                         Console.Write("Rediger Kundekartotek    1");
                         Console.SetCursorPosition(5, 9);
@@ -211,6 +225,8 @@ namespace Program
                                     case ConsoleKey.D3:
                                     case ConsoleKey.NumPad3:
                                         //Slet Bil her
+                                        break;
+                                    case ConsoleKey.Q:
                                         break;
                                     default:
                                         Console.WriteLine("Det var ikke én af valgmulighederne");
