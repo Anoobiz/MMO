@@ -60,8 +60,7 @@ namespace Program
 			Console.WriteLine();
 			Console.Write("Indtast ID på værksteds opholdet der skal slettes: ");
 			int idValg = Convert.ToInt32(Console.ReadLine());
-			SQL.Change("delete from Besøg where FakturaNr = " + idValg + "");
-			SQL.SelectBesøg("select * from Besøg");
+			SQL.Change("delete from Besøg where FakturaNr = " + idValg + "");			
 		}
 		public static void visBesøg()
 		{			

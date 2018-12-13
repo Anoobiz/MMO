@@ -9,7 +9,7 @@ namespace Program
 	class Kunde
 	{
 		public static void opretKunde()
-		{
+		{			
 			string Navn;
 			string Efternavn;
 			string Adr;
@@ -101,15 +101,15 @@ namespace Program
 			Console.Write("Indtast ID på kunden der skal slettes: ");
 			int idValg = Convert.ToInt32(Console.ReadLine());
 			SQL.Change("delete from Kunder where KundeId = " + idValg + "");
-			SQL.SelectFewKunde("select * from Kunder");
+			SQL.Change("delete from Bil where KundeId = " + idValg + "");
 		}
-		public static void visKunde()
+		public void visKunde()
 		{
 			int idValg = 0;
 			Console.Clear();
 			Forside.DisplayTop();
 			Console.WriteLine("Kundekartotek:\n");
-			SQL.SelectFewKunde("select * from Kunder");
+			SQL.SelectFewKunde("select * from Kunder order by Efternavn");
 			Console.Write("\nIndtast ID på den kunde du vil se: ");
 			try
 			{
@@ -117,11 +117,12 @@ namespace Program
 			}
 			catch (FormatException)
 			{
-				Console.WriteLine("Du må kun indtaste tal. Tryk på en tast.");					
+				Console.WriteLine("Du må kun indtaste tal. Tryk på en tast.");
 			}
 			SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
 			SQL.SelectFewBil("select * from Bil where KundeId = " + idValg + "");
 			Console.ReadKey();
+
 		}
 	}
 }
