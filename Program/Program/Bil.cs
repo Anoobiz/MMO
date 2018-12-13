@@ -12,12 +12,12 @@ namespace Program
 		{
 			string Mærke;
 			string Model;
-			int Årgang;
-			int KmKørt;
-			string Brændstof;
+			int Årgang = 0;
+			int KmKørt = 0;
+			string Brændstof = "";
 			string OpretDato;
 			string RegNr;
-			int KundeId;
+			int KundeId = 0;
 			Console.Clear();
 			Forside.DisplayTop();
 			Console.WriteLine("Indtast KundeID: ");
@@ -28,17 +28,80 @@ namespace Program
 			Console.WriteLine("Indtast Brændstof: ");
 			Console.WriteLine("Indtast RegistreringsNr: ");
 			Console.SetCursorPosition(30, 7);
-			KundeId = Convert.ToInt32(Console.ReadLine());
+            while (KundeId == 0)
+            {
+                try
+                {
+
+                    KundeId = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    Console.SetCursorPosition(0, 7);
+                    Console.WriteLine("Id skal være et tal");
+                    Console.SetCursorPosition(30, 7);
+                    Console.ReadKey(true);
+                }
+                catch (OverflowException)
+                {
+                    Console.SetCursorPosition(0, 7);
+                    Console.WriteLine("Tallet er for stort");
+                    Console.SetCursorPosition(30, 7);
+                    Console.ReadKey(true);
+                }
+            }
 			Console.SetCursorPosition(30, 8);
 			Mærke = Console.ReadLine();
 			Console.SetCursorPosition(30, 9);
 			Model = Console.ReadLine();
 			Console.SetCursorPosition(30, 10);
-			Årgang = Convert.ToInt32(Console.ReadLine());
+            while (Årgang == 0)
+            {
+                try
+                {
+                    Årgang = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    Console.SetCursorPosition(0, 10);
+                    Console.WriteLine("Indtast kun tal");
+                    Console.SetCursorPosition(30, 10);
+                    Console.ReadKey(true);
+                }
+            }
+            while (Årgang < 1900 || Årgang > 2019)
+            {
+                Console.SetCursorPosition(0, 10);
+                Console.WriteLine("Indtast et gyldigt årstal.");
+                Console.SetCursorPosition(30, 10);
+                Årgang = Convert.ToInt32(Console.ReadLine());
+            }
 			Console.SetCursorPosition(30, 11);
-			KmKørt = Convert.ToInt32(Console.ReadLine());
-			Console.SetCursorPosition(30, 12);
-			Brændstof = Console.ReadLine();
+            while (KmKørt == 0)
+            {
+                try
+                {
+                    KmKørt = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    Console.SetCursorPosition(0, 11);
+                    Console.WriteLine("Indtast tal");
+                    Console.SetCursorPosition(30, 11);
+                    Console.ReadKey(true);
+                }
+            }
+            
+            Console.SetCursorPosition(30, 12);
+            Brændstof = Console.ReadLine();
+            while (Brændstof.ToLower() != "benzin"&& Brændstof.ToLower() != "diesel")
+            {
+
+                Console.SetCursorPosition(0, 12);
+                Console.WriteLine("benzin eller diesel?");
+                Console.SetCursorPosition(30, 12);
+                Brændstof = Console.ReadLine();
+            }
 			Console.SetCursorPosition(30, 13);
 			RegNr = Console.ReadLine();
 			OpretDato = DateTime.Now.ToString("d");
