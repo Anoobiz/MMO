@@ -8,14 +8,6 @@ namespace Program
 {
 	class Kunde
 	{
-		//public string Navn { get; set; }
-		//public string Efternavn { get; set; }
-		//public string Adr { get; set; }
-		//public int Postnr { get; set; }
-		//public int Tlf { get; set; }
-		//public string OpretDato { get; set; }
-		//public string Email { get; set; }
-		//public List<Kunde> kunder = new List<Kunde>();
 		public static void opretKunde()
 		{			
 			string Navn;
@@ -47,7 +39,6 @@ namespace Program
 			Email = Console.ReadLine();
 			OpretDato = DateTime.Now.ToString("d");
 			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')");
-			//kunder.Add(new Kunde(Navn, Efternavn, Adr, Postnr, Tlf, OpretDato, Email));
 		}
 		public static void opdaterKunde()
 		{
@@ -131,25 +122,7 @@ namespace Program
 			SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
 			SQL.SelectFewBil("select * from Bil where KundeId = " + idValg + "");
 			Console.ReadKey();
-			//foreach (var item in kunder)
-			//{
-			//	Console.WriteLine(item.Navn);
-			//	Console.WriteLine(item.Efternavn);
-			//}
-		}
-		//public Kunde(string navn, string efternavn, string adr, int postnr, int tlf, string dato, string email)
-		//{
-		//	Navn = navn;
-		//	Efternavn = efternavn;
-		//	Adr = adr;
-		//	Postnr = postnr;
-		//	Tlf = tlf;
-		//	OpretDato = dato;
-		//	Email = email;
-		//}
-		//public Kunde()
-		//{
 
-		//}
+		}
 	}
 }
