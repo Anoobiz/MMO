@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace Program
 {
     class Forside
-    {
-        public static void DisplayTop()
+    {		
+		public static void DisplayTop()
         {
             int LogoLeftStart = Console.WindowWidth / 2 - 14;
             int TopBarTop = 0;
@@ -113,10 +113,9 @@ namespace Program
                 //Vælgere til switches
                 ConsoleKeyInfo vælger1 = Console.ReadKey(true);
                 ConsoleKeyInfo vælger2;
-                ConsoleKeyInfo vælger3;
-
-                //Hovedmenu
-                switch (vælger1.Key)
+                ConsoleKeyInfo vælger3;	
+				//Hovedmenu
+				switch (vælger1.Key)
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
@@ -166,6 +165,7 @@ namespace Program
                                     case ConsoleKey.D1:
                                     case ConsoleKey.NumPad1:
                                         Kunde.opretKunde();
+										
                                         break;
                                     case ConsoleKey.D2:
                                     case ConsoleKey.NumPad2:

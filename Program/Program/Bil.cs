@@ -110,8 +110,7 @@ namespace Program
 			Console.WriteLine();
 			Console.Write("Indtast ID på bilen der skal slettes: ");
 			int idValg = Convert.ToInt32(Console.ReadLine());
-			SQL.Change("delete from Bil where BilId = " + idValg + "");
-			SQL.SelectFewBil("select * from Bil");
+			SQL.Change("delete from Bil where BilId = " + idValg + "");			
 		}
 		public static void visBil()
 		{

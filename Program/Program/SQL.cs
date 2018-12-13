@@ -114,7 +114,7 @@ namespace Program
 				adapter.Fill(table);
 				if (table.Rows.Count < 1)
 				{
-					Console.WriteLine("Intet at se her.");
+					Console.WriteLine("Ingen biler registreret.");
 				}
 				else
 				{
