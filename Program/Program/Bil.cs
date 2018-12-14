@@ -8,16 +8,25 @@ namespace Program
 {
 	class Bil
 	{
-		public static void opretBil()
+		public string Mærke { get; set; }
+		public string Model { get; set; }
+		public int Årgang { get; set; }
+		public int KmKørt { get; set; }
+		public string  Brændstof { get; set; }
+		public string OpretDato { get; set; }
+		public string RegNr { get; set; }
+		public int KundeId { get; set; }
+		List<Bil> biler = new List<Bil>();
+		public void opretBil()
 		{
-			string Mærke;
-			string Model;
-			int Årgang = 0;
-			int KmKørt = 0;
-			string Brændstof = "";
-			string OpretDato;
-			string RegNr;
-			int KundeId = 0;
+			//string Mærke;
+			//string Model;
+			//int Årgang = 0;
+			//int KmKørt = 0;
+			//string Brændstof = "";
+			//string OpretDato;
+			//string RegNr;
+			//int KundeId = 0;
 			Console.Clear();
 			Forside.DisplayTop();
 			Console.WriteLine("Indtast KundeID: ");
@@ -106,6 +115,7 @@ namespace Program
 			RegNr = Console.ReadLine();
 			OpretDato = DateTime.Now.ToString("d");
 			SQL.Change("insert into Bil values(" + KundeId + ",'" + Mærke + "', '" + Model + "', " + Årgang + ", " + KmKørt + ", '" + Brændstof + "', '" + RegNr + "', '" + OpretDato + "')");
+			biler.Add(new Bil(Mærke, Model, Årgang, KmKørt, Brændstof, OpretDato, RegNr, KundeId));
 		}
 		public static void opdaterBil()
 		{
@@ -194,6 +204,21 @@ namespace Program
 			SQL.SelectAllDataBil("select * from Bil where BilId = " + idValg + "");
 			SQL.SelectBesøg("select * from Besøg where BilId = " + idValg + "");
 			Console.ReadKey();
+		}
+		public Bil(string mærke, string model, int årgang, int kmKørt, string brændstof, string opretDato, string regNR, int kundeId)
+		{
+			Mærke = mærke;
+			Model = model;
+			Årgang = årgang;
+			Brændstof = brændstof;
+			OpretDato = opretDato;
+			RegNr = regNR;
+			KundeId = kundeId;
+
+		}
+		public Bil()
+		{
+
 		}
 	}
 }
