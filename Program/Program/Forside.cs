@@ -93,7 +93,8 @@ namespace Program
         {
             bool kører = true;
 			Kunde Kunder = new Kunde();
-			
+			Bil Biler = new Bil();
+			Besøg besøg = new Besøg();
 
             while (kører)
             {
@@ -198,7 +199,7 @@ namespace Program
                                 {
                                     case ConsoleKey.D1:
                                     case ConsoleKey.NumPad1:
-										Bil.opretBil();
+										Biler.opretBil();
                                         break;
                                     case ConsoleKey.D2:
                                     case ConsoleKey.NumPad2:
@@ -232,7 +233,7 @@ namespace Program
                                 {
                                     case ConsoleKey.D1:
                                     case ConsoleKey.NumPad1:
-										Besøg.opretBesøg();
+										besøg.opretBesøg();
                                         break;
                                     case ConsoleKey.D2:
                                     case ConsoleKey.NumPad2:
