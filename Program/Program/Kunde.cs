@@ -8,15 +8,23 @@ namespace Program
 {
 	class Kunde
 	{
-		public static void opretKunde()
-		{			
-			string Navn;
-			string Efternavn;
-			string Adr;
-			int Postnr;
-			int Tlf;
-			string OpretDato;
-			string Email;
+		public string Navn { get; set; }
+		public string Efternavn { get; set; }
+		public string Adr { get; set; }
+		public int Postnr { get; set; }
+		public int Tlf { get; set; }
+		public string OpretDato { get; set; }
+		public string Email { get; set; }
+		List<Kunde> kunder = new List<Kunde>();
+		public void opretKunde()
+		{
+			//string Navn;
+			//string Efternavn;
+			//string Adr;
+			//int Postnr;
+			//int Tlf;
+			//string OpretDato;
+			//string Email;
 			Console.Clear();
 			Forside.DisplayTop();
 			Console.WriteLine("Indtast Navn: ");
@@ -38,8 +46,14 @@ namespace Program
 			Console.SetCursorPosition(30, 12);
 			Email = Console.ReadLine();
 			OpretDato = DateTime.Now.ToString("d");
-			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')");
+			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')");			
+			kunder.Add(new Kunde(Navn, Efternavn, Adr, Postnr, Tlf, Email, OpretDato));			
 		}
+		public void KundeListe()
+		{
+			
+		}
+
 		public static void opdaterKunde()
 		{
 			Console.WriteLine("Kundeliste:\n");
@@ -103,7 +117,7 @@ namespace Program
 			SQL.Change("delete from Kunder where KundeId = " + idValg + "");
 			SQL.Change("delete from Bil where KundeId = " + idValg + "");
 		}
-		public void visKunde()
+		public static void visKunde()
 		{
 			int idValg = 0;
 			Console.Clear();
@@ -122,6 +136,21 @@ namespace Program
 			SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
 			SQL.SelectFewBil("select * from Bil where KundeId = " + idValg + "");
 			Console.ReadKey();
+
+		}
+		public Kunde(string navn, string efternavn, string adr, int postnr, int tlf, string opretDato, string email)
+		{
+			Navn = navn;
+			Efternavn = efternavn;
+			Adr = adr;
+			Postnr = postnr;
+			Tlf = tlf;
+			OpretDato = opretDato;
+			Email = email;
+
+		}
+		public Kunde()
+		{
 
 		}
 	}

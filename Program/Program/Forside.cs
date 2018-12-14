@@ -92,6 +92,7 @@ namespace Program
         public static void Menu()
         {
             bool kører = true;
+			Kunde Kunder = new Kunde();
 			
 
             while (kører)
@@ -164,7 +165,7 @@ namespace Program
                                 {
                                     case ConsoleKey.D1:
                                     case ConsoleKey.NumPad1:
-                                        Kunde.opretKunde();
+                                        Kunder.opretKunde();
 										
                                         break;
                                     case ConsoleKey.D2:
