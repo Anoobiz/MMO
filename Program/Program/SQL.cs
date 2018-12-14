@@ -100,9 +100,7 @@ namespace Program
                         Console.WriteLine();
                     }
                 }
-
             }
-
         }
         public static void SelectFewBil(string sql)
         {
@@ -120,18 +118,16 @@ namespace Program
                 {
                     foreach (DataRow item in table.Rows)
                     {
-                        Console.Write(item["BilId"].ToString() + ". ");
-                        Console.Write(item["KundeId"].ToString() + " ");
-                        Console.Write(item["Mærke"].ToString() + " ");
-                        Console.Write(item["Model"].ToString() + " ");
-                        Console.Write(item["Årgang"].ToString() + " ");
-                        Console.Write(item["RegNr"].ToString() + " ");
+                        Console.Write("BilID: "+item["BilId"].ToString() + " - ");
+                        Console.Write("KundeID: "+item["KundeId"].ToString() + " - ");
+                        Console.Write("Mærke: "+item["Mærke"].ToString() + " - ");
+                        Console.Write("Model: "+item["Model"].ToString() + " - ");
+                        Console.Write("Årgang: "+item["Årgang"].ToString() + " - ");
+                        Console.Write("RegNr: "+item["RegNr"].ToString() + " ");
                         Console.WriteLine();
                     }
                 }
-
             }
-
         }
         public static void SelectBesøg(string sql)
         {
@@ -156,11 +152,8 @@ namespace Program
                         Console.WriteLine();
                     }
                 }
-
             }
-
         }
-
         public static DataTable SelectBesøgListe(string sql)
         {
             DataTable table = new DataTable();
@@ -170,10 +163,7 @@ namespace Program
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, con);
                 adapter.Fill(table);
                 return table;
-
             }
-
         }
-
     }
 }

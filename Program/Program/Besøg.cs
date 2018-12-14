@@ -11,7 +11,7 @@ namespace Program
         public int BilId { get; set; }
         public DateTime Dato { get; set; }
         public string Udført { get; set; }
-
+		List<Besøg> visits = new List<Besøg>();
         public void opretBesøg()
         {
             Console.Clear();
@@ -24,7 +24,8 @@ namespace Program
             Console.SetCursorPosition(30, 8);
             Udført = Console.ReadLine();
             Dato = DateTime.Now;
-            SQL.Change("insert into Besøg values(" + BilId + ", '" + Udført + "', '" + Dato + "')");
+			SQL.Change("insert into Besøg values(" + BilId + ", '" + Udført + "', '" + Dato + "')");
+			visits.Add(new Besøg(BilId, Dato, Udført));
         }
         public static void opdaterBesøg()
         {
@@ -73,5 +74,15 @@ namespace Program
             SQL.SelectBesøg("select * from Besøg");
             Console.ReadKey();
         }
+		public Besøg(int bilId, DateTime dato, string udført)
+		{
+			BilId = bilId;
+			Dato = dato;
+			Udført = udført;
+		}
+		public Besøg()
+		{
+
+		}
     }
 }
