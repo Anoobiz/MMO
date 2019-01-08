@@ -175,11 +175,13 @@ namespace Program
 		}
 		public static void opdaterBil()
 		{
+			Console.Clear();
+			Forside.DisplayTop();
 			Console.WriteLine("Bil liste:\n");
 			SQL.SelectFewBil("select * from Bil");
 			Console.Write("\nIndtast ID på bilen du vil redigere: ");
-			int idValg = Convert.ToInt32(Console.ReadLine());
-			SQL.SelectAllDataKunde("select * from Bil where BilId = " + idValg + "");
+			int idValg = 0;
+			SQL.SelectAllDataBil("select * from Bil where BilId = " + idValg + "");
 			Console.WriteLine("Indtast nummeret på den information du vil opdatere:");
 			Console.WriteLine("1. Mærke");
 			Console.WriteLine("2. Model");
@@ -234,6 +236,8 @@ namespace Program
 		}
 		public static void sletBil()
 		{
+			Console.Clear();
+			Forside.DisplayTop();
 			Console.WriteLine("Bil liste:\n");
 			SQL.SelectFewBil("select * from Bil");
 			Console.WriteLine();
