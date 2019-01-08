@@ -82,8 +82,20 @@ namespace Program
 			Console.WriteLine(KundeId);
 			Console.SetCursorPosition(50, 8);
 			Mærke = Console.ReadLine();
+			Console.SetCursorPosition(0, 8);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 8);
+			Console.WriteLine("Mærke:");
+			Console.SetCursorPosition(50, 8);
+			Console.WriteLine(Mærke);
 			Console.SetCursorPosition(50, 9);
 			Model = Console.ReadLine();
+			Console.SetCursorPosition(0, 9);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 9);
+			Console.WriteLine("Model:");
+			Console.SetCursorPosition(50, 9);
+			Console.WriteLine(Model);
 			Console.SetCursorPosition(50, 10);
             while (Årgang == 0)
             {
@@ -110,6 +122,12 @@ namespace Program
                     Console.ReadKey(true);
                 }
             }
+			Console.SetCursorPosition(0, 10);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 10);
+			Console.WriteLine("Årgang:");
+			Console.SetCursorPosition(50, 10);
+			Console.WriteLine(Årgang);
 			Console.SetCursorPosition(50, 11);
             while (KmKørt == 0)
             {
@@ -123,16 +141,19 @@ namespace Program
 					Console.Write("                                                                                            ");
 					Console.SetCursorPosition(0, 11);
 					Console.WriteLine("Km kørt skal være et tal, prøv igen:");
-                    Console.SetCursorPosition(50, 11);
-                    Console.ReadKey(true);
+                    Console.SetCursorPosition(50, 11);                    
                 }
             }
-            
-            Console.SetCursorPosition(50, 12);
+			Console.SetCursorPosition(0, 11);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 11);
+			Console.WriteLine("Kilometer kørt:");
+			Console.SetCursorPosition(50, 11);
+			Console.WriteLine(KmKørt);
+			Console.SetCursorPosition(50, 12);
             Brændstof = Console.ReadLine();
             while (Brændstof.ToLower() != "benzin"&& Brændstof.ToLower() != "diesel")
             {
-
                 Console.SetCursorPosition(0, 12);
 				Console.Write("                                                                                            ");
 				Console.SetCursorPosition(0, 12);
@@ -140,6 +161,12 @@ namespace Program
                 Console.SetCursorPosition(50, 12);
                 Brændstof = Console.ReadLine();
             }
+			Console.SetCursorPosition(0, 12);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 12);
+			Console.WriteLine("Brændstof:");
+			Console.SetCursorPosition(50, 12);
+			Console.WriteLine(Brændstof);
 			Console.SetCursorPosition(50, 13);
 			RegNr = Console.ReadLine();
 			OpretDato = DateTime.Now.ToString("d");
