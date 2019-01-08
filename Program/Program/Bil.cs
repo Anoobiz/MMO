@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace Program
 {
@@ -19,14 +20,6 @@ namespace Program
 		List<Bil> biler = new List<Bil>();
 		public void opretBil()
 		{
-			//string Mærke;
-			//string Model;
-			//int Årgang = 0;
-			//int KmKørt = 0;
-			//string Brændstof = "";
-			//string OpretDato;
-			//string RegNr;
-			//int KundeId = 0;
 			Console.Clear();
 			Forside.DisplayTop();
 			Console.WriteLine("Indtast KundeID: ");
@@ -36,56 +29,106 @@ namespace Program
 			Console.WriteLine("Indtast KmKørt: ");
 			Console.WriteLine("Indtast Brændstof: ");
 			Console.WriteLine("Indtast RegistreringsNr: ");
-			Console.SetCursorPosition(30, 7);
-            while (KundeId == 0)
+			Console.SetCursorPosition(50, 7);
+			bool loop = true;
+			int idFindes = 0;
+            while (loop)
             {
                 try
                 {
-
                     KundeId = Convert.ToInt32(Console.ReadLine());
-                }
+					foreach (DataRow item in SQL.Liste("Select KundeId from Kunder").Rows)
+					{
+						if (KundeId == Convert.ToInt32(item["KundeId"]))
+						{
+							idFindes = Convert.ToInt32(item["KundeId"]);							
+						}
+					}
+					if (KundeId == idFindes)
+					{
+						loop = false;						
+					}
+					else
+					{
+						Console.SetCursorPosition(0, 7);
+						Console.Write("                                                                                            ");
+						Console.SetCursorPosition(0, 7);
+						Console.WriteLine("Ugyldigt kundeId, prøv igen:");
+						Console.SetCursorPosition(50, 7);
+					}
+				}
                 catch (FormatException)
                 {
                     Console.SetCursorPosition(0, 7);
-                    Console.WriteLine("Id skal være et tal");
-                    Console.SetCursorPosition(30, 7);
-                    Console.ReadKey(true);
+					Console.Write("                                                                                            ");
+					Console.SetCursorPosition(0, 7);
+					Console.WriteLine("KundeId skal være et tal:");
+                    Console.SetCursorPosition(50, 7);                    
                 }
                 catch (OverflowException)
-                {
+                {					
                     Console.SetCursorPosition(0, 7);
-                    Console.WriteLine("Tallet er for stort");
-                    Console.SetCursorPosition(30, 7);
-                    Console.ReadKey(true);
+					Console.Write("                                                                                            ");
+					Console.SetCursorPosition(0, 7);
+					Console.WriteLine("Tallet er for stort, prøv igen:");					
+                    Console.SetCursorPosition(50, 7);                   
                 }
             }
-			Console.SetCursorPosition(30, 8);
+			Console.SetCursorPosition(0, 7);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 7);
+			Console.WriteLine("KundeId:");
+			Console.SetCursorPosition(50, 7);
+			Console.WriteLine(KundeId);
+			Console.SetCursorPosition(50, 8);
 			Mærke = Console.ReadLine();
-			Console.SetCursorPosition(30, 9);
+			Console.SetCursorPosition(0, 8);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 8);
+			Console.WriteLine("Mærke:");
+			Console.SetCursorPosition(50, 8);
+			Console.WriteLine(Mærke);
+			Console.SetCursorPosition(50, 9);
 			Model = Console.ReadLine();
-			Console.SetCursorPosition(30, 10);
+			Console.SetCursorPosition(0, 9);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 9);
+			Console.WriteLine("Model:");
+			Console.SetCursorPosition(50, 9);
+			Console.WriteLine(Model);
+			Console.SetCursorPosition(50, 10);
             while (Årgang == 0)
             {
                 try
                 {
                     Årgang = Convert.ToInt32(Console.ReadLine());
-                }
+					if (Årgang < 1900 || Årgang > 2019)
+					{
+						Console.SetCursorPosition(0, 10);
+						Console.Write("                                                                                            ");
+						Console.SetCursorPosition(0, 10);
+						Console.WriteLine("Indtast en gyldig årgang:");
+						Console.SetCursorPosition(50, 10);
+						Årgang = 0;
+					}
+				}
                 catch (FormatException)
                 {
                     Console.SetCursorPosition(0, 10);
-                    Console.WriteLine("Indtast kun tal");
-                    Console.SetCursorPosition(30, 10);
+					Console.Write("                                                                                            ");
+					Console.SetCursorPosition(0, 10);
+					Console.WriteLine("En årgang indeholder kun tal, prøv igen:");
+                    Console.SetCursorPosition(50, 10);
                     Console.ReadKey(true);
                 }
             }
-            while (Årgang < 1900 || Årgang > 2019)
-            {
-                Console.SetCursorPosition(0, 10);
-                Console.WriteLine("Indtast et gyldigt årstal.");
-                Console.SetCursorPosition(30, 10);
-                Årgang = Convert.ToInt32(Console.ReadLine());
-            }
-			Console.SetCursorPosition(30, 11);
+			Console.SetCursorPosition(0, 10);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 10);
+			Console.WriteLine("Årgang:");
+			Console.SetCursorPosition(50, 10);
+			Console.WriteLine(Årgang);
+			Console.SetCursorPosition(50, 11);
             while (KmKørt == 0)
             {
                 try
@@ -95,23 +138,36 @@ namespace Program
                 catch (FormatException)
                 {
                     Console.SetCursorPosition(0, 11);
-                    Console.WriteLine("Indtast tal");
-                    Console.SetCursorPosition(30, 11);
-                    Console.ReadKey(true);
+					Console.Write("                                                                                            ");
+					Console.SetCursorPosition(0, 11);
+					Console.WriteLine("Km kørt skal være et tal, prøv igen:");
+                    Console.SetCursorPosition(50, 11);                    
                 }
             }
-            
-            Console.SetCursorPosition(30, 12);
+			Console.SetCursorPosition(0, 11);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 11);
+			Console.WriteLine("Kilometer kørt:");
+			Console.SetCursorPosition(50, 11);
+			Console.WriteLine(KmKørt);
+			Console.SetCursorPosition(50, 12);
             Brændstof = Console.ReadLine();
             while (Brændstof.ToLower() != "benzin"&& Brændstof.ToLower() != "diesel")
             {
-
                 Console.SetCursorPosition(0, 12);
-                Console.WriteLine("benzin eller diesel?");
-                Console.SetCursorPosition(30, 12);
+				Console.Write("                                                                                            ");
+				Console.SetCursorPosition(0, 12);
+                Console.WriteLine("Benzin eller diesel:");
+                Console.SetCursorPosition(50, 12);
                 Brændstof = Console.ReadLine();
             }
-			Console.SetCursorPosition(30, 13);
+			Console.SetCursorPosition(0, 12);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 12);
+			Console.WriteLine("Brændstof:");
+			Console.SetCursorPosition(50, 12);
+			Console.WriteLine(Brændstof);
+			Console.SetCursorPosition(50, 13);
 			RegNr = Console.ReadLine();
 			OpretDato = DateTime.Now.ToString("d");
 			SQL.Change("insert into Bil values(" + KundeId + ",'" + Mærke + "', '" + Model + "', " + Årgang + ", " + KmKørt + ", '" + Brændstof + "', '" + RegNr + "', '" + OpretDato + "')");
