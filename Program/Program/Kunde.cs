@@ -43,46 +43,52 @@ namespace Program
             {
                 Console.SetCursorPosition(0, 7);
                 Console.WriteLine("Navn må ikke indeholde tal");
-                Console.SetCursorPosition(30, 7);
+                Console.SetCursorPosition(50, 7);
                 Navn = Console.ReadLine();
                 erDerTal = Navn.Any(c => char.IsDigit(c));
             }
-			Console.SetCursorPosition(30, 8);
+			Console.SetCursorPosition(50, 8);
 			Efternavn = Console.ReadLine();
             erDerTal = Efternavn.Any(c => char.IsDigit(c));
             while (erDerTal)
             {
                 Console.SetCursorPosition(0, 7);
                 Console.WriteLine("Efternavn må ikke indeholde tal");
-                Console.SetCursorPosition(30, 8);
+                Console.SetCursorPosition(50, 8);
                 Efternavn = Console.ReadLine();
                 erDerTal = Navn.Any(c => char.IsDigit(c));
             }
-            Console.SetCursorPosition(30, 9);
+            Console.SetCursorPosition(50, 9);
 			Adr = Console.ReadLine();
-			Console.SetCursorPosition(30, 10);
+			Console.SetCursorPosition(50, 10);
 			string temp = Console.ReadLine();
-            if (temp.Length == 4)
+            erDerBogstaver = temp.Any(c => char.IsLetter(c));
+            if (temp.Length == 4 && !erDerBogstaver)
             {
                 Postnr = Convert.ToInt32(temp);
             }else
             {
-                while (temp.Length != 4)
+                while (temp.Length != 4 && erDerBogstaver)
                 {
                     Console.SetCursorPosition(0, 10);
                     Console.WriteLine("Post nr er fire cifre!");
-                    Console.SetCursorPosition(30, 10);
+                    Console.SetCursorPosition(50, 10);
+                    erDerBogstaver = temp.Any(c => char.IsLetter(c));
+                    
                     temp = Console.ReadLine();
+                    Postnr = Convert.ToInt32(temp);
                 }
             }
-            Console.SetCursorPosition(30, 11);
+            
+
+            Console.SetCursorPosition(50, 11);
             temp = Console.ReadLine();
             erDerBogstaver = temp.Any(c => char.IsLetter(c));
             while (erDerBogstaver)
             {
                 Console.SetCursorPosition(0, 11);
                 Console.WriteLine("Tlf indeholder kun tal");
-                Console.SetCursorPosition(30, 11);
+                Console.SetCursorPosition(50, 11);
                 temp = Console.ReadLine();
                 erDerTal = temp.Any(c => char.IsDigit(c));
             }
