@@ -16,6 +16,9 @@ namespace Program
 		public string OpretDato { get; set; }
 		public string Email { get; set; }
 		List<Kunde> kunder = new List<Kunde>();
+
+        bool erDerTal;
+        bool erDerBogstaver;
 		public void opretKunde()
 		{
 			//string Navn;
@@ -35,16 +38,73 @@ namespace Program
 			Console.WriteLine("Indtast E-Mail adresse: ");
 			Console.SetCursorPosition(30, 7);
 			Navn = Console.ReadLine();
+            erDerTal = Navn.Any(c => char.IsDigit(c));
+            while (erDerTal)
+            {
+                Console.SetCursorPosition(0, 7);
+                Console.WriteLine("Navn må ikke indeholde tal");
+                Console.SetCursorPosition(30, 7);
+                Navn = Console.ReadLine();
+                erDerTal = Navn.Any(c => char.IsDigit(c));
+            }
 			Console.SetCursorPosition(30, 8);
 			Efternavn = Console.ReadLine();
-			Console.SetCursorPosition(30, 9);
+            erDerTal = Efternavn.Any(c => char.IsDigit(c));
+            while (erDerTal)
+            {
+                Console.SetCursorPosition(0, 7);
+                Console.WriteLine("Efternavn må ikke indeholde tal");
+                Console.SetCursorPosition(30, 8);
+                Efternavn = Console.ReadLine();
+                erDerTal = Navn.Any(c => char.IsDigit(c));
+            }
+            Console.SetCursorPosition(30, 9);
 			Adr = Console.ReadLine();
 			Console.SetCursorPosition(30, 10);
-			Postnr = Convert.ToInt32(Console.ReadLine());
-			Console.SetCursorPosition(30, 11);
-			Tlf = Convert.ToInt32(Console.ReadLine());
-			Console.SetCursorPosition(30, 12);
-			Email = Console.ReadLine();
+			string temp = Console.ReadLine();
+            if (temp.Length == 4)
+            {
+                Postnr = Convert.ToInt32(temp);
+            }else
+            {
+                while (temp.Length != 4)
+                {
+                    Console.SetCursorPosition(0, 10);
+                    Console.WriteLine("Post nr er fire cifre!");
+                    Console.SetCursorPosition(30, 10);
+                    temp = Console.ReadLine();
+                }
+            }
+            Console.SetCursorPosition(30, 11);
+            temp = Console.ReadLine();
+            erDerBogstaver = temp.Any(c => char.IsLetter(c));
+            while (erDerBogstaver)
+            {
+                Console.SetCursorPosition(0, 11);
+                Console.WriteLine("Tlf indeholder kun tal");
+                Console.SetCursorPosition(30, 11);
+                temp = Console.ReadLine();
+                erDerTal = temp.Any(c => char.IsDigit(c));
+            }
+            Tlf = Convert.ToInt32(temp);
+            Console.SetCursorPosition(30, 12);
+			temp = Console.ReadLine();
+            //Ville prøve denne her funktion til tjek af email- se nederst. Ville det være smart med en test-klasse???
+            if (IsValidEmail(temp))
+            {
+                Email = temp;
+            }
+            else
+            {
+                while(!IsValidEmail(temp))
+                {
+                    Console.SetCursorPosition(0, 12);
+                    Console.WriteLine("Indtast gyldig email");
+                    Console.SetCursorPosition(30, 12);
+                    temp = Console.ReadLine();
+
+                }
+            }
 			OpretDato = DateTime.Now.ToString("d");
 			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')");			
 			kunder.Add(new Kunde(Navn, Efternavn, Adr, Postnr, Tlf, Email, OpretDato));			
@@ -153,5 +213,17 @@ namespace Program
 		{
 
 		}
-	}
+        bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+    }
 }
