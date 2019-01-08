@@ -125,6 +125,7 @@ namespace Program
 			Console.WriteLine("Kundeliste:\n");
 			SQL.SelectFewKunde("select * from Kunder");
 			Console.Write("\nIndtast ID på kunden du vil redigere: ");
+            //Skal tjekke om Id findes i db
 			int idValg = Convert.ToInt32(Console.ReadLine());
 			SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
 			Console.WriteLine("Indtast nummeret på den information du vil opdatere:");
@@ -141,7 +142,9 @@ namespace Program
 				case ConsoleKey.D1:
 					Console.Write("Indtast et nyt navn: ");
 					info = Console.ReadLine();
-					SQL.Change("update Kunder set Navn = '" + info + "' where KundeId = " + idValg + "");
+                    bool erDerBogstaver = info.Any(c => char.IsLetter(c));
+
+                    SQL.Change("update Kunder set Navn = '" + info + "' where KundeId = " + idValg + "");
 					break;
 				case ConsoleKey.D2:
 					Console.Write("Indtast et nyt efternavn: ");
