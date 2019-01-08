@@ -165,16 +165,5 @@ namespace Program
 				return table;
 			}
 		}
-		//public static int Liste(string sql)
-		//{
-		//	DataTable table = new DataTable();
-		//	using (SqlConnection con = new SqlConnection(SQLcon.SQLconnection))
-		//	{
-		//		con.Open();
-		//		SqlDataAdapter adapter = new SqlDataAdapter(sql, con);
-		//		adapter.Fill(table);
-		//		return table.Rows.Contains;
-		//	}
-		//}
 	}
 }
