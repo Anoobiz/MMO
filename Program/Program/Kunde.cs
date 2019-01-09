@@ -52,7 +52,7 @@ namespace Program
             erDerTal = Efternavn.Any(c => char.IsDigit(c));
             while (erDerTal)
             {
-                Console.SetCursorPosition(0, 7);
+                Console.SetCursorPosition(0, 8);
                 Console.WriteLine("Efternavn må ikke indeholde tal");
                 Console.SetCursorPosition(50, 8);
                 Efternavn = Console.ReadLine();
@@ -74,7 +74,6 @@ namespace Program
                     Console.WriteLine("Post nr er fire cifre!");
                     Console.SetCursorPosition(50, 10);
                     erDerBogstaver = temp.Any(c => char.IsLetter(c));
-                    
                     temp = Console.ReadLine();
                     Postnr = Convert.ToInt32(temp);
                 }
@@ -106,12 +105,12 @@ namespace Program
                 {
                     Console.SetCursorPosition(0, 12);
                     Console.WriteLine("Indtast gyldig email");
-                    Console.SetCursorPosition(30, 12);
+                    Console.SetCursorPosition(50, 12);
                     temp = Console.ReadLine();
 
                 }
             }
-			OpretDato = DateTime.Now.ToString("d");
+            OpretDato = DateTime.Now.ToString("d");
 			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')");			
 			kunder.Add(new Kunde(Navn, Efternavn, Adr, Postnr, Tlf, Email, OpretDato));			
 		}
@@ -122,11 +121,12 @@ namespace Program
 
 		public static void opdaterKunde()
 		{
-			Console.WriteLine("Kundeliste:\n");
+            Console.Clear();
+            Forside.DisplayTop();
+            Console.WriteLine("Kundeliste:\n");
 			SQL.SelectFewKunde("select * from Kunder");
 			Console.Write("\nIndtast ID på kunden du vil redigere: ");
-            //Skal tjekke om Id findes i db
-			int idValg = Convert.ToInt32(Console.ReadLine());
+           int idValg = Convert.ToInt32(Console.ReadLine()); //exception handling?
 			SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
 			Console.WriteLine("Indtast nummeret på den information du vil opdatere:");
 			Console.WriteLine("1. Navn");
@@ -140,15 +140,28 @@ namespace Program
 			switch (nummer.Key)
 			{
 				case ConsoleKey.D1:
-					Console.Write("Indtast et nyt navn: ");
-					info = Console.ReadLine();
-                    bool erDerBogstaver = info.Any(c => char.IsLetter(c));
+                    bool erDerTal = true;
+                    Console.Write("Indtast et nyt navn: ");
+                    while (erDerTal)
+                    {
+                        Console.WriteLine("Navn kan ikke indeholde tal");
+                        info = Console.ReadLine();
+                        erDerTal = info.Any(c => char.IsDigit(c));
+
+                    }
 
                     SQL.Change("update Kunder set Navn = '" + info + "' where KundeId = " + idValg + "");
 					break;
 				case ConsoleKey.D2:
 					Console.Write("Indtast et nyt efternavn: ");
 					info = Console.ReadLine();
+                    erDerTal = info.Any(c => char.IsDigit(c));
+                    while (erDerTal)
+                    {
+                        Console.WriteLine("Navn kan ikke indeholde tal");
+                        info = Console.ReadLine();
+                        erDerTal = info.Any(c => char.IsDigit(c));
+                    }
 					SQL.Change("update Kunder set Efternavn = '" + info + "' where KundeId = " + idValg + "");
 					break;
 				case ConsoleKey.D3:
@@ -159,7 +172,9 @@ namespace Program
 				case ConsoleKey.D4:
 					Console.Write("Indtast et nyt postnummer: ");
 					info = Console.ReadLine();
-					SQL.Change("update Kunder set PostNr = " + info + " where KundeId = " + idValg + "");
+                    string temp = Console.ReadLine();
+                    //Try catch og kun fire cifre
+                    SQL.Change("update Kunder set PostNr = " + info + " where KundeId = " + idValg + "");
 					break;
 				case ConsoleKey.D5:
 					Console.Write("Indtast et nyt telefonnummer: ");
@@ -224,6 +239,7 @@ namespace Program
 		}
         bool IsValidEmail(string email)
         {
+            
             try
             {
                 var addr = new System.Net.Mail.MailAddress(email);
