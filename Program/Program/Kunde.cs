@@ -17,17 +17,9 @@ namespace Program
 		public string Email { get; set; }
 		List<Kunde> kunder = new List<Kunde>();
 
-        bool erDerTal;
-        bool erDerBogstaver;
+		bool erDerTal;
 		public void opretKunde()
 		{
-			//string Navn;
-			//string Efternavn;
-			//string Adr;
-			//int Postnr;
-			//int Tlf;
-			//string OpretDato;
-			//string Email;
 			Console.Clear();
 			Forside.DisplayTop();
 			Console.WriteLine("Indtast Navn: ");
@@ -36,160 +28,276 @@ namespace Program
 			Console.WriteLine("Indtast Postnummer: ");
 			Console.WriteLine("Indtast Telefonnummer: ");
 			Console.WriteLine("Indtast E-Mail adresse: ");
-			Console.SetCursorPosition(30, 7);
+			Console.SetCursorPosition(50, 7);
 			Navn = Console.ReadLine();
-            erDerTal = Navn.Any(c => char.IsDigit(c));
-            while (erDerTal)
-            {
-                Console.SetCursorPosition(0, 7);
-                Console.WriteLine("Navn må ikke indeholde tal");
-                Console.SetCursorPosition(50, 7);
-                Navn = Console.ReadLine();
-                erDerTal = Navn.Any(c => char.IsDigit(c));
-            }
+			erDerTal = Navn.Any(c => char.IsDigit(c));
+			while (erDerTal)
+			{
+				Console.SetCursorPosition(0, 7);
+				Console.Write("                                                                                            ");
+				Console.SetCursorPosition(0, 7);
+				Console.WriteLine("Navn må ikke indeholde tal, prøv igen:");
+				Console.SetCursorPosition(50, 7);
+				Navn = Console.ReadLine();
+				erDerTal = Navn.Any(c => char.IsDigit(c));
+			}
+			Console.SetCursorPosition(0, 7);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 7);
+			Console.WriteLine("Navn:");
+			Console.SetCursorPosition(50, 7);
+			Console.WriteLine(Navn);
 			Console.SetCursorPosition(50, 8);
 			Efternavn = Console.ReadLine();
-            erDerTal = Efternavn.Any(c => char.IsDigit(c));
-            while (erDerTal)
-            {
-                Console.SetCursorPosition(0, 8);
-                Console.WriteLine("Efternavn må ikke indeholde tal");
-                Console.SetCursorPosition(50, 8);
-                Efternavn = Console.ReadLine();
-                erDerTal = Navn.Any(c => char.IsDigit(c));
-            }
-            Console.SetCursorPosition(50, 9);
+			erDerTal = Efternavn.Any(c => char.IsDigit(c));
+			while (erDerTal)
+			{
+				Console.SetCursorPosition(0, 8);
+				Console.Write("                                                                                            ");
+				Console.SetCursorPosition(0, 8);
+				Console.WriteLine("Efternavn må ikke indeholde tal, prøv igen:");
+				Console.SetCursorPosition(50, 8);
+				Efternavn = Console.ReadLine();
+				erDerTal = Efternavn.Any(c => char.IsDigit(c));
+			}
+			Console.SetCursorPosition(0, 8);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 8);
+			Console.WriteLine("Efternavn:");
+			Console.SetCursorPosition(50, 8);
+			Console.WriteLine(Efternavn);
+			Console.SetCursorPosition(50, 9);
 			Adr = Console.ReadLine();
+			Console.SetCursorPosition(0, 9);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 9);
+			Console.WriteLine("Adresse:");
+			Console.SetCursorPosition(50, 9);
+			Console.WriteLine(Adr);
 			Console.SetCursorPosition(50, 10);
-			string temp = Console.ReadLine();
-            erDerBogstaver = temp.Any(c => char.IsLetter(c));
-            if (temp.Length == 4 && !erDerBogstaver)
-            {
-                Postnr = Convert.ToInt32(temp);
-            }else
-            {
-                while (temp.Length != 4 && erDerBogstaver)
-                {
-                    Console.SetCursorPosition(0, 10);
-                    Console.WriteLine("Post nr er fire cifre!");
-                    Console.SetCursorPosition(50, 10);
-                    erDerBogstaver = temp.Any(c => char.IsLetter(c));
-                    temp = Console.ReadLine();
-                    Postnr = Convert.ToInt32(temp);
-                }
-            }
-            
-
-            Console.SetCursorPosition(50, 11);
-            temp = Console.ReadLine();
-            erDerBogstaver = temp.Any(c => char.IsLetter(c));
-            while (erDerBogstaver)
-            {
-                Console.SetCursorPosition(0, 11);
-                Console.WriteLine("Tlf indeholder kun tal");
-                Console.SetCursorPosition(50, 11);
-                temp = Console.ReadLine();
-                erDerTal = temp.Any(c => char.IsDigit(c));
-            }
-            Tlf = Convert.ToInt32(temp);
-            Console.SetCursorPosition(30, 12);
-			temp = Console.ReadLine();
-            //Ville prøve denne her funktion til tjek af email- se nederst. Ville det være smart med en test-klasse???
-            if (IsValidEmail(temp))
-            {
-                Email = temp;
-            }
-            else
-            {
-                while(!IsValidEmail(temp))
-                {
-                    Console.SetCursorPosition(0, 12);
-                    Console.WriteLine("Indtast gyldig email");
-                    Console.SetCursorPosition(50, 12);
-                    temp = Console.ReadLine();
-
-                }
-            }
-            OpretDato = DateTime.Now.ToString("d");
-			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')");			
-			kunder.Add(new Kunde(Navn, Efternavn, Adr, Postnr, Tlf, Email, OpretDato));			
+			bool PostNrLoop = true;
+			while (PostNrLoop)
+			{
+				try
+				{
+					Postnr = Convert.ToInt32(Console.ReadLine());
+					if (Postnr.ToString().Length != 4)
+					{
+						Console.SetCursorPosition(0, 10);
+						Console.Write("                                                                                            ");
+						Console.SetCursorPosition(0, 10);
+						Console.WriteLine("Et postnummer er altid 4 cifre, prøv igen:");
+						Console.SetCursorPosition(50, 10);
+					}
+					else
+					{
+						PostNrLoop = false;
+					}
+				}
+				catch (Exception)
+				{
+					Console.SetCursorPosition(0, 10);
+					Console.Write("                                                                                            ");
+					Console.SetCursorPosition(0, 10);
+					Console.WriteLine("Et postnummer er altid et tal med 4 cifre, prøv igen:");
+					Console.SetCursorPosition(50, 10);
+				}
+			}
+			Console.SetCursorPosition(0, 10);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 10);
+			Console.WriteLine("Postnummer:");
+			Console.SetCursorPosition(50, 10);
+			Console.WriteLine(Postnr);
+			Console.SetCursorPosition(50, 11);
+			bool TlfLoop = true;
+			while (TlfLoop)
+			{
+				try
+				{
+					Tlf = Convert.ToInt32(Console.ReadLine());
+					if (Tlf.ToString().Length != 8)
+					{
+						Console.SetCursorPosition(0, 11);
+						Console.Write("                                                                                            ");
+						Console.SetCursorPosition(0, 11);
+						Console.WriteLine("Et telefonnummer er altid 8 cifre:");
+						Console.SetCursorPosition(50, 11);
+					}
+					else
+					{
+						TlfLoop = false;
+					}
+				}
+				catch (Exception)
+				{
+					Console.SetCursorPosition(0, 11);
+					Console.Write("                                                                                            ");
+					Console.SetCursorPosition(0, 11);
+					Console.WriteLine("Et telefonnummer er altid tal med 8 cifre:");
+					Console.SetCursorPosition(50, 11);
+				}
+			}
+			Console.SetCursorPosition(0, 11);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 11);
+			Console.WriteLine("Telefonnummer:");
+			Console.SetCursorPosition(50, 11);
+			Console.WriteLine(Tlf);
+			Console.SetCursorPosition(50, 12);
+			Email = Console.ReadLine();
+			while (!IsValidEmail(Email))
+			{
+				Console.SetCursorPosition(0, 12);
+				Console.Write("                                                                                            ");
+				Console.SetCursorPosition(0, 12);
+				Console.WriteLine("Ugyldig indtastning, prøv igen:");
+				Console.SetCursorPosition(50, 12);
+				Email = Console.ReadLine();
+			}
+			Console.SetCursorPosition(0, 12);
+			Console.Write("                                                                                            ");
+			Console.SetCursorPosition(0, 12);
+			Console.WriteLine("Email adresse:");
+			Console.SetCursorPosition(50, 12);
+			Console.WriteLine(Email);
+			OpretDato = DateTime.Now.ToString("d");
+			SQL.Change("insert into Kunder values('" + Navn + "', '" + Efternavn + "', '" + Adr + "', " + Postnr + ", " + Tlf + ", '" + Email + "', '" + OpretDato + "')");
+			kunder.Add(new Kunde(Navn, Efternavn, Adr, Postnr, Tlf, Email, OpretDato));
 		}
 		public void KundeListe()
 		{
-			
+
 		}
 
 		public static void opdaterKunde()
 		{
-            Console.Clear();
-            Forside.DisplayTop();
-            Console.WriteLine("Kundeliste:\n");
+			Console.Clear();
+			Forside.DisplayTop();
+			Console.WriteLine("Kundeliste:\n");
 			SQL.SelectFewKunde("select * from Kunder");
 			Console.Write("\nIndtast ID på kunden du vil redigere: ");
-           int idValg = Convert.ToInt32(Console.ReadLine()); //exception handling?
-			SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
-			Console.WriteLine("Indtast nummeret på den information du vil opdatere:");
-			Console.WriteLine("1. Navn");
-			Console.WriteLine("2. Efternavn");
-			Console.WriteLine("3. Adresse");
-			Console.WriteLine("4. Postnummer");
-			Console.WriteLine("5. Telefonnummer");
-			Console.WriteLine("6. E-Mail adresse\n");
-			var info = "";
-			ConsoleKeyInfo nummer = Console.ReadKey(true);
-			switch (nummer.Key)
+			int idValg = 0;
+			try
 			{
-				case ConsoleKey.D1:
-                    bool erDerTal = true;
-                    Console.Write("Indtast et nyt navn: ");
-                    while (erDerTal)
-                    {
-                        Console.WriteLine("Navn kan ikke indeholde tal");
-                        info = Console.ReadLine();
-                        erDerTal = info.Any(c => char.IsDigit(c));
-
-                    }
-
-                    SQL.Change("update Kunder set Navn = '" + info + "' where KundeId = " + idValg + "");
-					break;
-				case ConsoleKey.D2:
-					Console.Write("Indtast et nyt efternavn: ");
-					info = Console.ReadLine();
-                    erDerTal = info.Any(c => char.IsDigit(c));
-                    while (erDerTal)
-                    {
-                        Console.WriteLine("Navn kan ikke indeholde tal");
-                        info = Console.ReadLine();
-                        erDerTal = info.Any(c => char.IsDigit(c));
-                    }
-					SQL.Change("update Kunder set Efternavn = '" + info + "' where KundeId = " + idValg + "");
-					break;
-				case ConsoleKey.D3:
-					Console.Write("Indtast en ny adresse: ");
-					info = Console.ReadLine();
-					SQL.Change("update Kunder set Adresse = '" + info + "' where KundeId = " + idValg + "");
-					break;
-				case ConsoleKey.D4:
-					Console.Write("Indtast et nyt postnummer: ");
-					info = Console.ReadLine();
-                    string temp = Console.ReadLine();
-                    //Try catch og kun fire cifre
-                    SQL.Change("update Kunder set PostNr = " + info + " where KundeId = " + idValg + "");
-					break;
-				case ConsoleKey.D5:
-					Console.Write("Indtast et nyt telefonnummer: ");
-					info = Console.ReadLine();
-					SQL.Change("update Kunder set Tlf = " + info + " where KundeId = " + idValg + "");
-					break;
-				case ConsoleKey.D6:
-					Console.Write("Indtast en ny E-Mail adresse: ");
-					info = Console.ReadLine();
-					SQL.Change("update Kunder set Adresse = '" + info + "' where KundeId = " + idValg + "");
-					break;
-				default:
-					Console.WriteLine("Du må kun vælge et nummer fra listen.");
-					break;
+				idValg = Convert.ToInt32(Console.ReadLine());
+				SQL.SelectAllDataKunde("select * from Kunder where KundeId = " + idValg + "");
+				Console.WriteLine("Indtast nummeret på den information du vil opdatere:");
+				Console.WriteLine("1. Navn");
+				Console.WriteLine("2. Efternavn");
+				Console.WriteLine("3. Adresse");
+				Console.WriteLine("4. Postnummer");
+				Console.WriteLine("5. Telefonnummer");
+				Console.WriteLine("6. E-Mail adresse\n");
+				var info = "";
+				bool erDerTal;
+				ConsoleKeyInfo nummer = Console.ReadKey(true);
+				switch (nummer.Key)
+				{
+					case ConsoleKey.D1:
+						Console.Write("Indtast et nyt navn: ");
+						info = Console.ReadLine();
+						erDerTal = info.Any(c => char.IsDigit(c));						
+						while (erDerTal)
+						{
+							Console.WriteLine("Navn kan ikke indeholde tal, prøv igen");
+							Console.Write("Indtast et nyt navn: ");
+							info = Console.ReadLine();
+							erDerTal = info.Any(c => char.IsDigit(c));
+						}
+						SQL.Change("update Kunder set Navn = '" + info + "' where KundeId = " + idValg + "");
+						break;
+					case ConsoleKey.D2:
+						Console.Write("Indtast et nyt efternavn: ");
+						info = Console.ReadLine();
+						erDerTal = info.Any(c => char.IsDigit(c));
+						while (erDerTal)
+						{
+							Console.WriteLine("Navn kan ikke indeholde tal, prøv igen");
+							Console.Write("Indtast et nyt navn: ");
+							info = Console.ReadLine();
+							erDerTal = info.Any(c => char.IsDigit(c));
+						}
+						SQL.Change("update Kunder set Efternavn = '" + info + "' where KundeId = " + idValg + "");
+						break;
+					case ConsoleKey.D3:
+						Console.Write("Indtast en ny adresse: ");
+						info = Console.ReadLine();
+						SQL.Change("update Kunder set Adresse = '" + info + "' where KundeId = " + idValg + "");
+						break;
+					case ConsoleKey.D4:
+						Console.Write("Indtast et nyt postnummer: ");
+						bool PostNrLoop = true;
+						while (PostNrLoop)
+						{
+							try
+							{
+								info = Console.ReadLine();
+								if (info.ToString().Length != 4)
+								{
+									Console.WriteLine("Et postnummer er altid 4 cifre, prøv igen:");
+									Console.Write("Indtast et nyt postnummer: ");
+								}
+								else
+								{
+									PostNrLoop = false;
+								}
+							}
+							catch (Exception)
+							{
+								Console.WriteLine("Et postnummer er altid et tal med 4 cifre, prøv igen:");
+								Console.Write("Indtast et nyt postnummer: ");
+							}
+						}
+						SQL.Change("update Kunder set PostNr = " + info + " where KundeId = " + idValg + "");
+						break;
+					case ConsoleKey.D5:
+						Console.Write("Indtast et nyt telefonnummer: ");
+						bool TlfLoop = true;
+						while (TlfLoop)
+						{
+							try
+							{
+								info = Console.ReadLine();
+								if (info.ToString().Length != 8)
+								{
+									Console.WriteLine("Et telefonnummer er altid 8 cifre:");
+									Console.Write("Indtast et nyt telefonnummer: ");
+								}
+								else
+								{
+									TlfLoop = false;
+								}
+							}
+							catch (Exception)
+							{
+								Console.WriteLine("Et telefonnummer er altid tal med 8 cifre:");
+								Console.Write("Indtast et nyt telefonnummer: ");
+							}
+						}
+						SQL.Change("update Kunder set Tlf = " + info + " where KundeId = " + idValg + "");
+						break;
+					case ConsoleKey.D6:
+						Console.Write("Indtast en ny E-Mail adresse: ");
+						info = Console.ReadLine();
+						while (!IsValidEmail(info))
+						{
+							Console.WriteLine("Ugyldig indtastning, prøv igen:");
+							Console.Write("Indtast en ny E-Mail adresse: ");
+							info = Console.ReadLine();
+						}
+						SQL.Change("update Kunder set Email = '" + info + "' where KundeId = " + idValg + "");
+						break;
+					default:
+						Console.WriteLine("Du må kun vælge et nummer fra listen.");
+						break;
+				}
 			}
+			catch (Exception)
+			{
+				
+			}
+
 		}
 		public static void sletKunde()
 		{
@@ -197,7 +305,15 @@ namespace Program
 			SQL.SelectFewKunde("select * from Kunder");
 			Console.WriteLine();
 			Console.Write("Indtast ID på kunden der skal slettes: ");
-			int idValg = Convert.ToInt32(Console.ReadLine());
+			int idValg = 0;
+			try
+			{
+				idValg = Convert.ToInt32(Console.ReadLine());
+			}
+			catch (Exception)
+			{
+
+			}
 			SQL.Change("delete from Kunder where KundeId = " + idValg + "");
 			SQL.Change("delete from Bil where KundeId = " + idValg + "");
 		}
@@ -237,18 +353,17 @@ namespace Program
 		{
 
 		}
-        bool IsValidEmail(string email)
-        {
-            
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-    }
+		static bool IsValidEmail(string email)
+		{
+			try
+			{
+				var addr = new System.Net.Mail.MailAddress(email);
+				return addr.Address == email;
+			}
+			catch
+			{
+				return false;
+			}
+		}
+	}
 }

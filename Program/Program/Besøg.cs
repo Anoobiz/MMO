@@ -21,7 +21,6 @@ namespace Program
             Console.WriteLine("Indtast udført arbejde: ");
 			Console.SetCursorPosition(50, 7);
 			BilId = 0;
-			//LOGIK til at finde biler og sørge for at kun biler der findes kan indtastes
 			bool loop = true;
 			int idFindes = 0;
 			while (loop)
