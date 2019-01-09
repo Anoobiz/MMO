@@ -101,14 +101,13 @@ namespace Program
 				switch (nummer.Key)
 				{
 					case ConsoleKey.D1:
-						Console.Write("Indtast et nyt bil ID: ");
-						//LOGIK til at finde biler og sørge for at kun biler der findes kan indtastes
-						info = Console.ReadLine(); //burde ikke rigtigt kunne fejle
-						SQL.Change("update Besøg set BildId = '" + info + "' where FakturaNr = " + idValg + "");
+						Console.Write("Indtast et nyt bil ID: ");						
+						info = Console.ReadLine(); 
+						SQL.Change("update Besøg set BilId = '" + info + "' where FakturaNr = " + idValg + "");
 						break;
 					case ConsoleKey.D2:
 						Console.Write("Indtast nyt udført arbejde: ");
-						info = Console.ReadLine(); //burde heller ikke kunne fejle
+						info = Console.ReadLine(); 
 						SQL.Change("update Besøg set Udført = '" + info + "' where FakturaNr = " + idValg + "");
 						break;
 					default:

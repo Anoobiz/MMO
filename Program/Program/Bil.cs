@@ -240,8 +240,7 @@ namespace Program
 			catch (Exception)
 			{
 				
-			}			
-
+			}
 		}
 		public static void sletBil()
 		{
@@ -251,7 +250,15 @@ namespace Program
 			SQL.SelectFewBil("select * from Bil");
 			Console.WriteLine();
 			Console.Write("Indtast ID på bilen der skal slettes: ");
-			int idValg = Convert.ToInt32(Console.ReadLine());
+			int idValg = 0;
+			try
+			{
+				idValg = Convert.ToInt32(Console.ReadLine());
+			}
+			catch (Exception)
+			{
+				
+			}			
 			SQL.Change("delete from Bil where BilId = " + idValg + "");			
 		}
 		public static void visBil()
@@ -283,7 +290,6 @@ namespace Program
 			OpretDato = opretDato;
 			RegNr = regNR;
 			KundeId = kundeId;
-
 		}
 		public Bil()
 		{
