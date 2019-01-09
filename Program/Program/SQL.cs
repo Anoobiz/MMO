@@ -95,8 +95,9 @@ namespace Program
 						Console.WriteLine("Model: " + item["Model"].ToString() + " ");
 						Console.WriteLine("Årgang: " + item["Årgang"].ToString() + " ");
 						Console.WriteLine("Km kørt: " + item["KmKørt"].ToString() + " ");
-						Console.WriteLine("Brændstof: " + item["Brændstof"].ToString() + " ");
+						Console.WriteLine("Brændstof: " + item["Brændstof"].ToString() + " ");						
 						Console.WriteLine("Reg Nr: " + item["RegNr"].ToString() + " ");
+						Console.WriteLine("Opret Dato: " + item["OpretDato"].ToString() + " ");
 						Console.WriteLine();
 					}
 				}
@@ -123,7 +124,8 @@ namespace Program
 						Console.Write("Mærke: " + item["Mærke"].ToString() + " - ");
 						Console.Write("Model: " + item["Model"].ToString() + " - ");
 						Console.Write("Årgang: " + item["Årgang"].ToString() + " - ");
-						Console.Write("RegNr: " + item["RegNr"].ToString() + " ");
+						Console.Write("RegNr: " + item["RegNr"].ToString() + " - ");
+						Console.Write("Dato: " + item["OpretDato"].ToString() + " ");
 						Console.WriteLine();
 					}
 				}
